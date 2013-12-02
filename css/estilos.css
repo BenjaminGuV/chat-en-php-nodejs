@@ -1,0 +1,20 @@
+#divMensajes{
+	border: 1px solid #ccc;
+	float: left;
+	height: 300px;
+	min-height: 30px;
+	overflow: scroll;
+	width: 250px;
+}
+
+#divUsuario{
+	border: 1px solid #ccc;
+	float: left;
+	height: 100px;
+	width: 100px;
+	margin: 10px;
+}
+
+.clear{
+	clear: both;
+}
