@@ -31,6 +31,16 @@ $(document).ready(function() {
 			console.log("mensaje del socket");
 			console.log(data);
 		});
+
+
+		socket.on('eliUsuariosconectados', function (data) {
+			console.log("eliminando");
+			console.log(data);
+			if ( $('#uid' + data ).length != 0 ) {
+				$('#uid' + data ).remove();
+			};
+		});
+
 	};
 
 	function usuariosConectados ( nombre, key ) {

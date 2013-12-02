@@ -29,11 +29,14 @@ app.get('/', function (req, res) {
 io.sockets.on('connection', function (socket) {
 	console.log("conectado");
 
+	var idG = null;
+
 	socket.on('sendUsuarioConectado', function (data, id) {
 		if ( typeof data == 'undefined' || typeof data == 'undefined' ) {
 			console.log('fallo');
 		}else{
 			nomUsuarios[ id ] = data;
+			idG = id;
 		}
 
 		console.log( 'nomUsuarios' );
@@ -51,9 +54,16 @@ io.sockets.on('connection', function (socket) {
 	/* socket desconectado */
 	socket.on( 'disconnect', function(){
 
+		console.log( 'temp id' );
+		console.log( idG );
+
 		//delete nomUsuarios[ cookie ];
 
 		io.sockets.emit("El usuario se desconecto");
+
+		io.sockets.emit('eliUsuariosconectados', idG);
+
+
 	});
 
 });
