@@ -45,5 +45,8 @@
 		<br>
 		<input type="button" id="enviarMensaje" value="enviar">
 	</div>
+	<div>
+		<p><a href="logout.php">Salir</a></p>
+	</div>
 </body>
 </html>

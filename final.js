@@ -47,6 +47,7 @@ io.sockets.on('connection', function (socket) {
 	});
 
 	socket.on('sendMensaje', function (data) {
+		console.log("llego mensaje");
 		console.log(data);
 		io.sockets.emit('getMensaje', data);
 	});
@@ -56,6 +57,8 @@ io.sockets.on('connection', function (socket) {
 
 		console.log( 'temp id' );
 		console.log( idG );
+
+		delete nomUsuarios[ idG ];
 
 		//delete nomUsuarios[ cookie ];
 

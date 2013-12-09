@@ -13,8 +13,6 @@ $(document).ready(function() {
 
 		socket.emit('sendUsuarioConectado', $('#nombre').val(), $('#id').val() );
 
-		usuariosConectados('Yo');
-
 		socket.on( 'getUsuarioConectado', function (data) {
 			console.log( 'si llego' );
 			console.log( data );
@@ -30,6 +28,9 @@ $(document).ready(function() {
 		socket.on('getMensaje', function (data) {
 			console.log("mensaje del socket");
 			console.log(data);
+
+			imprimirMensaje(data);
+
 		});
 
 
@@ -55,14 +56,29 @@ $(document).ready(function() {
 
 	}
 
-	$('#enviarMensaje').click( function () {
+	function imprimirMensaje (msj) {
+		this.msj = msj;
 
+		this.mensaje = $('</p>').html( this.msj );
+
+		$('#divMensajes').append( this.mensaje );
+
+		//$('html, body').animate({scrollTop: $elem.height()}, 800);
+
+		console.log( $('#divMensajes').height() );
+
+		$('#divMensajes').animate( { scrollTop: $('#divMensajes').height() } );
+
+	}
+
+	$('#enviarMensaje').click( function () {
 
 		console.log("tesd");
 
 		var mensaje = $('#mensaje').val();
+		var nombre = $('#nombre').val();
 
-		socket.emit('sendMensaje', "usuario: " + mensaje );
+		socket.emit('sendMensaje', nombre + ": " + mensaje );
 
 		mensaje = $('</p>').html( 'yo: ' + mensaje );
 
