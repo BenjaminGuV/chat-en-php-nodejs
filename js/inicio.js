@@ -78,15 +78,30 @@ $(document).ready(function() {
 		var mensaje = $('#mensaje').val();
 		var nombre = $('#nombre').val();
 
-		socket.emit('sendMensaje', nombre + ": " + mensaje );
+		console.log(mensaje);
+		console.log(typeof mensaje);
+		console.log(mensaje.length);
 
-		mensaje = $('</p>').html( 'yo: ' + mensaje );
+		if ( mensaje != '' ) {
+			socket.emit('sendMensaje', nombre + ": " + mensaje );
 
-		$('#divMensajes').append( mensaje );
+			mensaje = $('</p>').html( 'yo: ' + mensaje );
+
+			$('#divMensajes').append( mensaje );
+		};
+
 
 		$('#mensaje').val('');
 
+		$('#mensaje').focus();
+
 	} );
+
+	$('#mensaje').keypress(function(e) {
+	    if(e.which == 13) {
+	        $('#enviarMensaje').trigger('click');
+	    }
+	});
 
 	$('#nombre').focus(function() {
 		$(this).val('');
