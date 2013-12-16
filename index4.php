@@ -25,25 +25,42 @@
 	<script src="js/inicio.js"></script>
 </head>
 <body>
-	<div id="contenedorMensajes">
-		<div id="divMensajes">
+	<div id="contMensajes">
+		<div id="contenedorMensajes">
+			<div id="divMensajes">
 
+			</div>
+			
+			<div id="divUsuario">
+
+			</div>
 		</div>
-		
-		<div id="divUsuario">
-
+		<div id="mensajePrivados">
+			<div id="divMensajes_priv">
+				
+			</div>
 		</div>
 	</div>
 	
 	<div class="clear"></div>
 
 	<div class="form">
+		<label>Mensajes</label><br>
 		<input type="text" id="nombre" value="<?php echo $nombre; ?>" disabled>
 		<input type="hidden" id="id" value="<?php echo $id_unico; ?>">
 		<br>
 		<textarea id="mensaje"></textarea>
 		<br>
 		<input type="button" id="enviarMensaje" value="enviar">
+	</div>
+	<div class="form">
+		<label>Mensaje privado :D</label><br>
+		<input type="text" id="nombre_priv" value="" disabled>
+		<input type="hidden" id="id_priv" value="">
+		<br>
+		<textarea id="mensaje_priv"></textarea>
+		<br>
+		<input type="button" id="enviarMensaje_priv" value="enviar">
 	</div>
 	<div>
 		<p><a href="logout.php">Salir</a></p>

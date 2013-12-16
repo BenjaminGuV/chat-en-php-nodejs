@@ -45,7 +45,7 @@ $(document).ready(function() {
 	};
 
 	function usuariosConectados ( nombre, key ) {
-		var msj = $('</p>').html( nombre ).attr('id', 'uid' + key);
+		var msj = $('</p>').addClass('userCon').html( nombre ).attr('id', 'uid' + key);
 
 		if ( $('#uid' + key ).length == 0 ) {
 			$('#divUsuario').append(msj);
@@ -58,6 +58,9 @@ $(document).ready(function() {
 
 	function imprimirMensaje (msj) {
 		this.msj = msj;
+		var nombre = $('#nombre').val();
+
+		this.msj = this.msj.replace( nombre, 'yo' );
 
 		this.mensaje = $('</p>').html( this.msj );
 
@@ -65,34 +68,23 @@ $(document).ready(function() {
 
 		//$('html, body').animate({scrollTop: $elem.height()}, 800);
 
-		console.log( $('#divMensajes').height() );
+		var posicion = $('#divMensajes p').length * $('#divMensajes p').outerHeight(true);
 
-		$('#divMensajes').animate( { scrollTop: $('#divMensajes').height() } );
+		$('#divMensajes').animate( { scrollTop: posicion } );
 
 	}
 
 	$('#enviarMensaje').click( function () {
 
-		console.log("tesd");
-
 		var mensaje = $('#mensaje').val();
 		var nombre = $('#nombre').val();
 
-		console.log(mensaje);
-		console.log(typeof mensaje);
-		console.log(mensaje.length);
-
 		if ( mensaje != '' ) {
 			socket.emit('sendMensaje', nombre + ": " + mensaje );
-
-			mensaje = $('</p>').html( 'yo: ' + mensaje );
-
-			$('#divMensajes').append( mensaje );
 		};
 
 
 		$('#mensaje').val('');
-
 		$('#mensaje').focus();
 
 	} );
@@ -100,11 +92,26 @@ $(document).ready(function() {
 	$('#mensaje').keypress(function(e) {
 	    if(e.which == 13) {
 	        $('#enviarMensaje').trigger('click');
+	        return false;
 	    }
 	});
 
 	$('#nombre').focus(function() {
 		$(this).val('');
+	});
+
+	$('#divUsuario').on( "click", '.userCon', function (event) {
+		event.preventDefault();
+		console.log("test");
+		$('.userCon').removeClass('seleccionPrivada');
+		$(this).addClass('seleccionPrivada');
+
+		var nombre    = $(this).html();
+		var idPrivado = $(this).attr('id');
+
+		$('#nombre_priv').val( nombre );
+		$('#id_priv').val( idPrivado );
+
 	});
 
 });
